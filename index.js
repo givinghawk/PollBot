@@ -114,6 +114,13 @@ client.on('message', async message => {
             }));
             message.reply("Set your preset to preset **5**.");
         }
+        if(args[0] == "6") {
+            // write the args to the config file
+            fs.writeFileSync('./settings/' + message.guild.id + '.json', JSON.stringify({
+                emojis: ["😀", "😁", "😂", "🤣", "😃", "😄", "😅", "😆"]
+            }));
+            message.reply("Set your preset to preset **5**.");
+        }
     }
     // if message starts with config.prefix + viewpreset, send a message
     if(message.content.startsWith(config.prefix + 'viewpreset')) {
@@ -135,6 +142,9 @@ client.on('message', async message => {
         }
         if(args[0] == "5") {
             message.reply("Preset **5** ❤, 🧡, 💛, 💚, 💙, 💜, 🤎, 🖤");
+        }
+        if(args[0] == "6") {
+            message.reply("Preset **6** 😀, 😁, 😂, 🤣, 😃, 😄, 😅, 😆");
         }
     }
 });
