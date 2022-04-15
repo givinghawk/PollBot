@@ -13,7 +13,7 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 // ready event
 client.on('ready', () => {
     // set the bots activity to pb.help
-    client.user.setActivity('pb.help', { type: 'WATCHING' });
+    client.user.setActivity(config.prefix + 'help', { type: 'WATCHING' });
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
@@ -23,7 +23,7 @@ client.on('message', async message => {
     if(message.author.bot) return;
     // if message is config.prefix + help, send a message
     if(message.content.startsWith(config.prefix + 'help')) {
-        message.reply("Help yourself, I can't help you.");
+        message.reply("```\n" + config.prefix + "help - shows this message\n" + config.prefix + "setpreset [preset] - Set your preset\n" + config.prefix + "viewpreset [preset] - Show a preset\n" + config.prefix + "startpoll [up to 8 options] - Create a poll in the current channel```");
     }
     // if message starts with config.prefix + startpoll, split the message into an array
     if(message.content.startsWith(config.prefix + 'startpoll')) {
