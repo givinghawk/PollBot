@@ -23,12 +23,12 @@ client.on('message', async message => {
     if(message.author.bot) return;
     // if message is config.prefix + help, send a message
     if(message.content.startsWith(config.prefix + 'help')) {
-        message.reply("```\n" + config.prefix + "help - shows this message\n" + config.prefix + "setpreset [preset] - Set your preset\n" + config.prefix + "viewpreset [preset] - Show a preset\n" + config.prefix + "startpoll [up to 8 options] - Create a poll in the current channel```");
+        message.reply("```\n" + config.prefix + "help - shows this message\n" + config.prefix + "setpreset [preset] - Set your preset\n" + config.prefix + "viewpreset [preset] - Show a preset\n" + config.prefix + "startpoll,[up to 8 options (comma seperated)] - Create a poll in the current channel```");
     }
     // if message starts with config.prefix + startpoll, split the message into an array
     if(message.content.startsWith(config.prefix + 'startpoll')) {
         // split the message into an array
-        let args = message.content.split(' ');
+        let args = message.content.split(',');
         // count args, and if there are more than 10 args, send a message
         if(args.length > 9) {
             message.reply("Too many options! There are only 8 emojis!");
