@@ -1,4 +1,4 @@
-<center><img src="https://cdn.discordapp.com/attachments/956292913275502622/964954383584485386/image-removebg-preview.png" width="100"></center>
+<div align="center"><img src="https://cdn.discordapp.com/attachments/956292913275502622/964954383584485386/image-removebg-preview.png" width="100"></div>
 
 # PollBot
 The best bot to make polls for you!
