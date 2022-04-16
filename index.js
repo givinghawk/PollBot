@@ -27,6 +27,7 @@ setInterval(() => {
 
 client.on('message', async message => {
     if(message.author.bot) return;
+    if(!message.content.startsWith(config.prefix)) return;
     if(message.content.startsWith(config.prefix + 'help')) {
         message.reply("```\n" + config.prefix + "help - shows this message\n" + config.prefix + "setpreset [preset] - Set your preset\n" + config.prefix + "viewpreset [preset] - Show a preset\n" + config.prefix + "startpoll,[up to 8 options (comma seperated)] - Create a poll in the current channel```");
     }
@@ -112,6 +113,10 @@ http.createServer(function (req, res) {
                 });
             });
         });
+    } else {
+        res.writeHead(403);
+        res.write("<style>body{background-color: #000;color: #fff;font-family: arial;font-size: 20px;}</style>");
+        res.end('<h1>403 Forbidden</h1>');
     }
 }).listen(config.webport);
 
