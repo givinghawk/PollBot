@@ -2,6 +2,7 @@ const config = require('./config.json');
 const Discord = require('discord.js');
 const canvas = require('canvas');
 const fs = require('fs');
+const http = require('http');
 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 client.on('ready', () => {
@@ -70,7 +71,7 @@ client.on('message', async message => {
               })              
             message.reply("Set your preset to preset **" + args[0] + "**.");
         } else {
-            message.reply("Hmm, I could not find that preset. Please make sure that your preset exists.");
+            message.reply("Hmm, I could not find that preset. Please make sure that your preset exists. You can see a list of avalable presets by going to http://" + config.webip + ":" + config.webport);
         }
     }
     if(message.content.startsWith(config.prefix + 'viewpreset')) {
@@ -91,9 +92,27 @@ client.on('message', async message => {
                 message.reply("Preset **" + args[0] + "**:\n" + json.emojis.join(" "));
               })              
         } else {
-            message.reply("Hmm, I could not find that preset. Please make sure that your preset exists.");
+            message.reply("Hmm, I could not find that preset. Please make sure that your preset exists. You can see a list of avalable presets by going to http://" + config.webip + ":" + config.webport);
         }
     }
 });
+
+http.createServer(function (req, res) {
+    if (req.url === '/') {
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write("<style>body{background-color: #000;color: #fff;font-family: arial;font-size: 20px;}</style>");
+        fs.readdir('./presets', (err, files) => {
+            if (err) throw err;
+            files.forEach(file => {
+                fs.readFile('./presets/' + file, 'utf8', (err, data) => {
+                    if (err) throw err;
+                    var json = JSON.parse(data);
+                    var string = file.replace('.pollbotpreset', '');
+                    res.write("Preset <strong>" + string + "</strong>: <img src=\"" + json.image + "\"><br>");
+                });
+            });
+        });
+    }
+}).listen(config.webport);
 
 client.login(config.token);
